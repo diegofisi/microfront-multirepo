@@ -1,10 +1,10 @@
 # Curso de Microfrontends con React.js
 
-**Instructora:** Diana Alderete 
-**Duración:** 23 de abril – 21 de mayo
-**Días y horario:** Lunes y miércoles, 21:00 – 23:00 h 
-**Modalidad:** Virtual (Zoom) 
-**Certificación:** Digital, previa aprobación de examen por parte del alumno   
+- **Instructora:** Diana Alderete 
+- **Duración:** 23 de abril – 21 de mayo
+- **Días y horario:** Lunes y miércoles, 21:00 – 23:00 h 
+- **Modalidad:** Virtual (Zoom) 
+- **Certificación:** Digital, previa aprobación de examen por parte del alumno   
 
 ## Descripción
 Este curso proporciona los conceptos, estándares y herramientas para diseñar e implementar arquitecturas de Microfrontends con React.js. Se desarrollan casos prácticos progresivos y un proyecto integrado de una plataforma de solicitud de créditos, incluyendo su despliegue.
