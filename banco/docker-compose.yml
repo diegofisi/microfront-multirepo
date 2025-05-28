@@ -1,0 +1,104 @@
+version: "3.8"
+
+services:
+  bff-exchange:
+    build:
+      context: ./bff-exchange
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - microfrontend-network
+
+  shared-libs:
+    build:
+      context: .
+      dockerfile: Dockerfile.shared-libs
+    volumes:
+      - shared-libs-volume:/app/shared-libs
+    networks:
+      - microfrontend-network
+
+  login:
+    build:
+      context: ./login
+      dockerfile: Dockerfile
+    ports:
+      - "3003:3003"
+    depends_on:
+      - shared-libs
+    volumes:
+      - shared-libs-volume:/app/shared-libs:ro
+      - ./common-utils:/app/node_modules/common-utils:ro
+    environment:
+      - NODE_ENV=production
+    networks:
+      - microfrontend-network
+
+  money-exchange:
+    build:
+      context: ./moneyExchange
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    depends_on:
+      - shared-libs
+      - bff-exchange
+    volumes:
+      - shared-libs-volume:/app/shared-libs:ro
+      - ./common-resources:/app/node_modules/common-resources:ro
+      - ./common-utils:/app/node_modules/common-utils:ro
+    environment:
+      - NODE_ENV=production
+      - BFF_URL=http://bff-exchange:4000
+    networks:
+      - microfrontend-network
+
+  payment:
+    build:
+      context: ./payment
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002"
+    depends_on:
+      - shared-libs
+    volumes:
+      - shared-libs-volume:/app/shared-libs:ro
+      - ./common-webcomponents:/app/node_modules/common-webcomponents:ro
+    environment:
+      - NODE_ENV=production
+    networks:
+      - microfrontend-network
+
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - login
+      - money-exchange
+      - payment
+      - bff-exchange
+    volumes:
+      - shared-libs-volume:/app/shared-libs:ro
+      - ./common-components-react:/app/node_modules/common-components-react:ro
+      - ./common-utils:/app/node_modules/common-utils:ro
+    environment:
+      - NODE_ENV=production
+      - LOGIN_URL=http://login:3003
+      - MONEY_EXCHANGE_URL=http://money-exchange:3001
+      - PAYMENT_URL=http://payment:3002
+      - BFF_URL=http://bff-exchange:4000
+    networks:
+      - microfrontend-network
+
+volumes:
+  shared-libs-volume:
+
+networks:
+  microfrontend-network:
+    driver: bridge

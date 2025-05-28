@@ -1,0 +1,40 @@
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+
+RUN npm install -g pnpm
+
+COPY common-utils/ ./common-utils/
+COPY common-components-react/ ./common-components-react/
+COPY common-webcomponents/ ./common-webcomponents/
+COPY common-resources/ ./common-resources/
+
+WORKDIR /app/common-utils
+RUN pnpm install
+RUN pnpm pack
+
+WORKDIR /app/common-components-react
+RUN pnpm install
+RUN pnpm run build
+RUN pnpm pack
+
+WORKDIR /app/common-webcomponents
+RUN pnpm install
+RUN pnpm pack
+
+WORKDIR /app/common-resources
+RUN pnpm install
+RUN pnpm pack
+
+WORKDIR /app
+RUN mkdir -p /app/shared-libs
+RUN cp common-utils/*.tgz /app/shared-libs/
+RUN cp common-components-react/*.tgz /app/shared-libs/
+RUN cp common-webcomponents/*.tgz /app/shared-libs/
+RUN cp common-resources/*.tgz /app/shared-libs/
+
+FROM alpine:latest
+WORKDIR /app
+COPY --from=builder /app/shared-libs /app/shared-libs
+
+CMD ["tail", "-f", "/dev/null"]

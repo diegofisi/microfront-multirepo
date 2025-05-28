@@ -1,0 +1,13 @@
+@use "./variables" as vars;
+
+@mixin btn-base {
+  display: block;
+  padding: vars.$btn-padding;
+  font-size: vars.$btn-font-size;
+  border-radius: vars.$btn-radius;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  width: 100%;
+  border: none;
+}
