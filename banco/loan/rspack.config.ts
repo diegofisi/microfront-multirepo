@@ -84,6 +84,8 @@ export default {
           eager: true,
           requiredVersion: '^18.2.0'
         },
+        'common-utils': { singleton: true, eager: true },
+        rxjs: { singleton: true, eager: true },
       },
     }),
   ],
