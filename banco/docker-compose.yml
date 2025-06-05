@@ -1,4 +1,4 @@
-version: "3.8"
+version: '3.8'
 
 services:
   bff-exchange:
@@ -6,7 +6,18 @@ services:
       context: ./bff-exchange
       dockerfile: Dockerfile
     ports:
-      - "4000:4000"
+      - '4000:4000'
+    environment:
+      - NODE_ENV=production
+    networks:
+      - microfrontend-network
+
+  bff-bank-load:
+    build:
+      context: ./bff-bank-loan
+      dockerfile: Dockerfile
+    ports:
+      - '4001:4001'
     environment:
       - NODE_ENV=production
     networks:
@@ -26,7 +37,7 @@ services:
       context: ./login
       dockerfile: Dockerfile
     ports:
-      - "3003:3003"
+      - '3003:3003'
     depends_on:
       - shared-libs
     volumes:
@@ -42,7 +53,7 @@ services:
       context: ./moneyExchange
       dockerfile: Dockerfile
     ports:
-      - "3001:3001"
+      - '3001:3001'
     depends_on:
       - shared-libs
       - bff-exchange
@@ -61,7 +72,7 @@ services:
       context: ./payment
       dockerfile: Dockerfile
     ports:
-      - "3002:3002"
+      - '3002:3002'
     depends_on:
       - shared-libs
     volumes:
@@ -72,17 +83,34 @@ services:
     networks:
       - microfrontend-network
 
+  loan:
+    build:
+      context: ./loan
+      dockerfile: Dockerfile
+    ports:
+      - '3004:3004'
+    depends_on:
+      - shared-libs
+      - bff-bank-load
+    environment:
+      - NODE_ENV=production
+      - BFF_URL=http://bff-bank-load:4001
+    networks:
+      - microfrontend-network
+
   dashboard:
     build:
       context: ./dashboard
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - '3000:3000'
     depends_on:
       - login
       - money-exchange
       - payment
+      - loan
       - bff-exchange
+      - bff-bank-load
     volumes:
       - shared-libs-volume:/app/shared-libs:ro
       - ./common-components-react:/app/node_modules/common-components-react:ro
@@ -92,7 +120,9 @@ services:
       - LOGIN_URL=http://login:3003
       - MONEY_EXCHANGE_URL=http://money-exchange:3001
       - PAYMENT_URL=http://payment:3002
+      - LOAN_URL=http://loan:3004
       - BFF_URL=http://bff-exchange:4000
+      - LOAN_BFF_URL=http://bff-bank-load:4001
     networks:
       - microfrontend-network
 

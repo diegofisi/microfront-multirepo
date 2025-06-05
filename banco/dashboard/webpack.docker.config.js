@@ -32,6 +32,7 @@ module.exports = {
         login: "login@http://localhost:3003/remoteEntry.js",
         moneyExchange: "moneyExchange@http://localhost:3001/remoteEntry.js",
         payment: "payment@http://localhost:3002/remoteEntry.js",
+        loan: "loan@http://localhost:3004/remoteEntry.js",
       },
       shared: {
         react: { singleton: true, eager: true },

@@ -6,6 +6,7 @@ import AngularLoginWrapper from "./components/AngularLoginWrapper";
 
 const ExchangeTool = lazy(() => import("moneyExchange/ExchangeTool"));
 const Payment = lazy(() => import("payment/Payment"));
+const LoanCalculator = lazy(() => import("loan/LoanCalculator"));
 
 const App = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -216,6 +217,15 @@ const App = () => {
             >
               Pagos
             </div>
+            <div
+              style={{
+                ...styles.navItem,
+                ...(activeTab === "loans" ? styles.activeNavItem : {}),
+              }}
+              onClick={() => setActiveTab("loans")}
+            >
+              Préstamos
+            </div>
           </nav>
 
           <main style={styles.content}>
@@ -286,6 +296,15 @@ const App = () => {
                       <div>Préstamo Personal: S/ 350.00</div>
                       <div>Fecha: 28/05/2023</div>
                     </div>
+
+                    <div style={{...styles.conversionToolContainer, marginTop: "20px"}}>
+                      <div style={styles.toolTitle}>
+                        Calculadora de Préstamos
+                      </div>
+                      <Suspense fallback={<div>Cargando calculadora...</div>}>
+                        <LoanCalculator />
+                      </Suspense>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -317,6 +336,22 @@ const App = () => {
                 <Suspense fallback={<div>Cargando modulo de pagos...</div>}>
                   <Payment />
                 </Suspense>
+              </div>
+            )}
+
+            {activeTab === "loans" && (
+              <div>
+                <h2>Calculadora de Préstamos</h2>
+                <p>Calcula las cuotas y el total de tu préstamo de manera sencilla.</p>
+                <div style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "20px"
+                }}>
+                  <Suspense fallback={<div>Cargando calculadora de préstamos...</div>}>
+                    <LoanCalculator />
+                  </Suspense>
+                </div>
               </div>
             )}
           </main>
