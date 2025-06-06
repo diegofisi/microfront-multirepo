@@ -2,6 +2,10 @@
 
 Este proyecto forma parte de la **Clase 8** del curso, cuyo tema principal es la arquitectura de **micro frontends** utilizando múltiples frameworks. Todo contenido en contenedores Docker.
 
+# Microfront-Multirepo
+
+Repositorio para el proyecto de microfrontends con múltiples repositorios.
+
 ## Arquitectura
 
 - **Dashboard** (Host)  - Aplicación React en el puerto 3000

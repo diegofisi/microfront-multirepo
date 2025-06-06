@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Curso de Microfrontends con React.js
 
 - **Instructora:** Diana Alderete 
@@ -65,3 +66,7 @@ Este curso proporciona los conceptos, estándares y herramientas para diseñar e
 #### Sesión 09 — Miércoles, 21 de mayo  
 **Tema:**  Presentación y evaluación de proyectos por los alumnos  
 
+=======
+# microfront-multirepo
+PoC for galaxy training course - Usage tecnologies: Webpack, Module Fededarion, RsPack, Tailwind, Css, Sass
+>>>>>>> bbcda17508c01f0d251ef047e64b7a27cdb8957d
