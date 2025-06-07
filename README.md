@@ -1,72 +1,27 @@
-<<<<<<< HEAD
-# Curso de Microfrontends con React.js
+Microfront Multirepo
 
-- **Instructora:** Diana Alderete 
-- **Duración:** 23 de abril – 21 de mayo
-- **Días y horario:** Lunes y miércoles, 21:00 – 23:00 h 
-- **Modalidad:** Virtual (Zoom) 
-- **Certificación:** Digital, previa aprobación de examen por parte del alumno   
+## Para revisión del proyecto:
 
-## Descripción
-Este curso proporciona los conceptos, estándares y herramientas para diseñar e implementar arquitecturas de Microfrontends con React.js. Se desarrollan casos prácticos progresivos y un proyecto integrado de una plataforma de solicitud de créditos, incluyendo su despliegue.
+# MicrofrontMonorepo
 
+Para revisión del proyecto:
+MicrofrontMonorepo
+Para revisión del proyecto:
 
-## Objetivos
-- Comprender los fundamentos y componentes clave de una arquitectura Microfrontends.  
-- Aprender a organizar equipos y repositorios (monorepo vs multirepo).  
-- Implementar PoCs en React.js utilizando Module Federation (Host, Remote).  
-- Desplegar aplicaciones Microfrontend en contenedores Docker.
+Puntos a cubrir en la rúbrica en este multirepo:
 
-
-## Requisitos Académicos
-- Conocimientos básicos de arquitectura de aplicaciones.  
-- Nivel intermedio de React.js.  
-- Experiencia con servicios o microservicios 
-- Experiencia en desarrollo de aplicaciones web en cualquier lenguaje. 
-
-
-## Metodología
-1. Exposición teórica de cada tema.  
-2. Desarrollo de casos prácticos individuales y progresivos.  
-3. Compartir experiencias del instructor y de los alumnos. 
+* **Diseño conceptual** (#3): PoC Multirepo añadido Loan (para préstamos)
+* **PoC + Servicios** (#4): Loan está consumiendo su propio backend bff-loan
+* **Comunicación** (#7): se está usando Pub/Sub para la comunicación entre Loan y Host
+* **Contenedores** (#9): se está dockerizando Loan y su backend asociado
+* **Otros** (#10) : Se esta usando el patron iFrame para un widget de noticias financieras
+  
+El resto de la rúbrica se estará tratando en otro proyecto que es https://github.com/diegofisi/microfront-monorepo y se esta cubriendo lo siguiente
+* **Diseño conceptual**: (#1) revisar la carpeta `binaries` y la imagen 
+* **PoC del monorepo** (#2) App de monorepo con Nx
+* **Aplicación Host** (#5) : aplicacion host donde consume los remotos CATALOG PROFILE Y TRANSFERS
+* **Aplicaciones** (#6): las aplicaciones remotas son `CATALOG`, `PROFILE` y `TRANSFERS`
+* **Comunicación** (#7): uso de contextos para compartir información entre microfronts
+* **Librerías** (#8): uso de librerías personalizadas en `libs/shared` para componente de bienvenida
 
 
-## Tecnologías
-- **Frontend:** React.js, JavaScript/TypeScript, Redux.  
-- **Estilos:** CSS, React Bootstrap o Tailwind.  
-- **Herramientas:** Node.js, npm, VS Code/WebStorm, Git/GitHub, Docker.  
-- **Backend:** API REST, Microservices
-
-## Sesiones
-
-#### Sesión 01 — Miércoles, 23 de abril  
-**Tema:** Introducción a Arquitectura Microfrontends (MFEs)  
- 
-#### Sesión 02 — Lunes, 28 de abril  
-**Tema:** Introducción a Microfrontends en React.js
-
-#### Sesión 03 — Miércoles, 30 de abril  
-**Tema:**  Microfrontends con Monorepository  
-
-#### Sesión 04 — Lunes, 5 de mayo  
-**Tema:** Microfrontends con Multirepository  
-
-#### Sesión 05 — Miércoles, 7 de mayo  
-**Tema:** Estandarización y reutilización de componentes  
-
-#### Sesión 06 — Lunes, 12 de mayo  
-**Tema:** Comunicación y seguridad en Microfrontends  
- 
-#### Sesión 07 — Miércoles, 14 de mayo  
-**Tema:** Microfrontends Multi-Framework (React, Angular, Vue)  
-
-#### Sesión 08 — Lunes, 19 de mayo  
-**Tema:** Despliegue de Microfrontends en Docker  
-
-#### Sesión 09 — Miércoles, 21 de mayo  
-**Tema:**  Presentación y evaluación de proyectos por los alumnos  
-
-=======
-# microfront-multirepo
-PoC for galaxy training course - Usage tecnologies: Webpack, Module Fededarion, RsPack, Tailwind, Css, Sass
->>>>>>> bbcda17508c01f0d251ef047e64b7a27cdb8957d
