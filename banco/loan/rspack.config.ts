@@ -7,6 +7,10 @@ export default {
   entry: './src/index.tsx',
   resolve: {
     extensions: ['.tsx', '.ts', '.jsx', '.js'],
+    alias: {
+      'common-utils': path.resolve(__dirname, '../common-utils'),
+      rxjs: path.resolve(__dirname, 'node_modules/rxjs'),
+    },
   },
   devServer: {
     port: 3004,
@@ -74,15 +78,15 @@ export default {
         './App': './src/App',
       },
       shared: {
-        react: { 
-          singleton: true, 
+        react: {
+          singleton: true,
           eager: true,
-          requiredVersion: '^18.2.0'
+          requiredVersion: '^18.2.0',
         },
-        'react-dom': { 
-          singleton: true, 
+        'react-dom': {
+          singleton: true,
           eager: true,
-          requiredVersion: '^18.2.0'
+          requiredVersion: '^18.2.0',
         },
         'common-utils': { singleton: true, eager: true },
         rxjs: { singleton: true, eager: true },

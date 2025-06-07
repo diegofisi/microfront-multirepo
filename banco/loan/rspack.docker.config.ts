@@ -1,9 +1,10 @@
-import * as path from 'path';
-import { rspack } from '@rspack/core';
-import { ModuleFederationPlugin } from '@module-federation/enhanced/rspack';
+// loan/rspack.docker.config.cjs
+const path = require('path');
+const { rspack } = require('@rspack/core');
+const { ModuleFederationPlugin } = require('@module-federation/enhanced/rspack');
 
-export default {
-  mode: 'development' as const,
+module.exports = {
+  mode: 'development',
   entry: './src/index.tsx',
   resolve: {
     extensions: ['.tsx', '.ts', '.jsx', '.js'],
@@ -13,72 +14,46 @@ export default {
     host: '0.0.0.0',
     allowedHosts: 'all',
     historyApiFallback: true,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
-      'Access-Control-Allow-Headers':
-        'X-Requested-With, content-type, Authorization',
-    },
+    headers: { 'Access-Control-Allow-Origin': '*' },
   },
-  output: {
-    uniqueName: 'loan',
-    publicPath: 'auto',
-    clean: true,
-  },
-  experiments: {
-    css: true,
-  },
+  output: { uniqueName: 'loan', publicPath: 'auto', clean: true },
+  experiments: { css: true },
   module: {
     rules: [
-      {
-        test: /\.svg$/,
-        type: 'asset' as const,
-      },
-      {
-        test: /\.css$/,
-        use: ['postcss-loader'],
-        type: 'css' as const,
-      },
+      { test: /\.svg$/, type: 'asset' },
+      { test: /\.css$/, use: ['postcss-loader'], type: 'css' },
       {
         test: /\.(tsx?|jsx?)$/,
         use: {
           loader: 'builtin:swc-loader',
           options: {
             jsc: {
-              parser: {
-                syntax: 'typescript',
-                tsx: true,
-              },
+              parser: { syntax: 'typescript', tsx: true },
               transform: {
-                react: {
-                  runtime: 'automatic',
-                  development: true,
-                  refresh: false,
-                },
-              },
-            },
-          },
-        },
-      },
-    ],
+                react: { runtime: 'automatic', development: true, refresh: false }
+              }
+            }
+          }
+        }
+      }
+    ]
   },
   plugins: [
-    new rspack.HtmlRspackPlugin({
-      template: './index.html',
-    }),
+    new rspack.HtmlRspackPlugin({ template: './index.html' }),
     new ModuleFederationPlugin({
       name: 'loan',
       filename: 'remoteEntry.js',
       exposes: {
         './LoanCalculator': './src/components/LoanCalculator',
-        './App': './src/App',
+        './App':            './src/App',
       },
       shared: {
-        react: { singleton: true, eager: true },
-        'react-dom': { singleton: true, eager: true },
-        'common-utils': { singleton: true, eager: true },
-        rxjs: { singleton: true, eager: true },
+        react:         { singleton: true, eager: true, requiredVersion: '^18.2.0' },
+        'react-dom':   { singleton: true, eager: true, requiredVersion: '^18.2.0' },
+        'common-utils':{ singleton: true, eager: true },
+        rxjs:          { singleton: true, eager: true },
       },
+      dts: false,  // desactiva generación de tipos en Docker
     }),
   ],
 };

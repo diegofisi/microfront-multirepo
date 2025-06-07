@@ -21,6 +21,7 @@ const App = () => {
   const [transacciones, setTransacciones] = useState([]);
   const { user, theme, setTheme, setUser } = useContext(AppContext);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loanHistory, setLoanHistory] = useState([]);
 
   // Estados específicos para el iframe
   const iframeRef = useRef(null);
@@ -28,10 +29,10 @@ const App = () => {
   const [selectedNews, setSelectedNews] = useState(null);
   const [newsCount, setNewsCount] = useState(0);
 
-  //URL del iframe - COMPLETAMENTE INDEPENDIENTE
+  //URL del iframe
   const getIframeUrl = () => {
     if (process.env.NODE_ENV === 'development') {
-      return 'http://localhost:3005'; // Tu app React independiente
+      return 'http://localhost:3005'; // URL del iframe
     }
     return process.env.FINANCIAL_NEWS_URL || 'http://financial-news:3005';
   };
@@ -79,6 +80,20 @@ const App = () => {
     window.addEventListener('message', handleIframeMessage);
     return () => window.removeEventListener('message', handleIframeMessage);
   }, [handleIframeMessage]);
+
+  useEffect(() => {
+    const sub = bus.subscribe((msg) => {
+      if (msg.topic === 'prestamoCalculado') {
+        setLoanHistory((prev) => [msg.payload, ...prev]);
+        return;
+      }
+      if (msg.topic === 'transaccionCambio') {
+        setTransacciones((prev) => [msg.payload, ...prev]);
+      }
+    });
+
+    return () => sub.unsubscribe();
+  }, []);
 
   // Enviar cambios de tema al iframe
   useEffect(() => {
@@ -417,6 +432,34 @@ const App = () => {
                       fallback={<div>Cargando convertidor de divisas...</div>}
                     >
                       <ExchangeTool />
+                      <div
+                        style={{
+                          ...styles.conversionToolContainer,
+                          marginTop: 20,
+                        }}
+                      >
+                        <div style={styles.toolTitle}>
+                          Historial de Préstamos
+                        </div>
+
+                        {loanHistory.length === 0 && (
+                          <p>No hay cálculos de préstamos.</p>
+                        )}
+
+                        {loanHistory.map((loan) => (
+                          <div
+                            key={loan.id}
+                            style={{ marginBottom: 8, fontSize: 14 }}
+                          >
+                            <strong>${loan.amount.toLocaleString()}</strong> ·{' '}
+                            {loan.months} mes&nbsp; · {loan.annualRate}% TNA →
+                            <span style={{ color: '#166534' }}>
+                              ${loan.monthlyPayment.toLocaleString()} / mes
+                            </span>{' '}
+                            (total ${loan.totalPayment.toLocaleString()})
+                          </div>
+                        ))}
+                      </div>
                     </Suspense>
                   </div>
                 </div>

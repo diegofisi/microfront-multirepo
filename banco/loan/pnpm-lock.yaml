@@ -11,12 +11,21 @@ importers:
       '@module-federation/enhanced':
         specifier: ^0.8.9
         version: 0.8.12(@rspack/core@1.2.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.8.3)
+      common-resources:
+        specifier: file:..\common-resources\common-resources-1.0.0.tgz
+        version: file:../common-resources/common-resources-1.0.0.tgz
+      common-utils:
+        specifier: file:..\common-utils\common-utils-1.0.0.tgz
+        version: file:../common-utils/common-utils-1.0.0.tgz
       react:
         specifier: ^18.2.0
         version: 18.3.1
       react-dom:
         specifier: ^18.2.0
         version: 18.3.1(react@18.3.1)
+      rxjs:
+        specifier: ^7.8.2
+        version: 7.8.2
     devDependencies:
       '@rspack/cli':
         specifier: ~1.2.0
@@ -697,6 +706,14 @@ packages:
   commander@7.2.0:
     resolution: {integrity: sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw==}
     engines: {node: '>= 10'}
+
+  common-resources@file:../common-resources/common-resources-1.0.0.tgz:
+    resolution: {integrity: sha512-9NWDD+Tv5zeJoq3tVBcoyJNRkDnWZ3hUsJ229kf9aXb7yTnnNqBD1J2VP9PulIyitXsCK9+vFAmw1uKg7Diwmg==, tarball: file:../common-resources/common-resources-1.0.0.tgz}
+    version: 1.0.0
+
+  common-utils@file:../common-utils/common-utils-1.0.0.tgz:
+    resolution: {integrity: sha512-8B3y3ILLw2hQ0uLFMDY/3QEitXvBJlQi94M3n4kCnG0NLu1ngtnayje+wdgGf3yayNki9s8WAJfZ+mKO9GJNhw==, tarball: file:../common-utils/common-utils-1.0.0.tgz}
+    version: 1.0.0
 
   compressible@2.0.18:
     resolution: {integrity: sha512-AF3r7P5dWxL8MxyITRMlORQNaOA2IkAFaTr4k7BUumjPtRpGDTZpl0Pb1XCO6JeDCBdp126Cgs9sMxqSjgYyRg==}
@@ -1726,6 +1743,9 @@ packages:
   run-applescript@7.0.0:
     resolution: {integrity: sha512-9by4Ij99JUr/MCFBUkDKLWK3G9HVXmabKz9U5MlIAIuvuzkiOicRYs8XJLxX+xahD+mLiiCYDqF9dKAgtzKP1A==}
     engines: {node: '>=18'}
+
+  rxjs@7.8.2:
+    resolution: {integrity: sha512-dhKf903U/PQZY6boNNtAGdWbG85WAbjT/1xYoZIC7FAY0yWapOBQVsVrDl58W86//e1VpMNBtRV4MaXfdMySFA==}
 
   safe-buffer@5.1.2:
     resolution: {integrity: sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==}
@@ -2823,6 +2843,12 @@ snapshots:
 
   commander@7.2.0: {}
 
+  common-resources@file:../common-resources/common-resources-1.0.0.tgz: {}
+
+  common-utils@file:../common-utils/common-utils-1.0.0.tgz:
+    dependencies:
+      rxjs: 7.8.2
+
   compressible@2.0.18:
     dependencies:
       mime-db: 1.54.0
@@ -3797,6 +3823,10 @@ snapshots:
       glob: 10.4.5
 
   run-applescript@7.0.0: {}
+
+  rxjs@7.8.2:
+    dependencies:
+      tslib: 2.8.1
 
   safe-buffer@5.1.2: {}
 

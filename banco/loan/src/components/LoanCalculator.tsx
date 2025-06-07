@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { bus } from 'common-utils';
+
 interface LoanResult {
   monthlyPayment: number;
   totalPayment: number;
@@ -41,6 +43,21 @@ const LoanCalculator: React.FC = () => {
 
       const data = await response.json();
       setResult(data);
+
+      const loanData = {
+        id: Date.now(),
+        amount: parseFloat(formData.amount),
+        months: parseInt(formData.months),
+        annualRate: parseFloat(formData.annualRate),
+        monthlyPayment: data.monthlyPayment,
+        totalPayment: data.totalPayment,
+        calculatedAt: new Date().toISOString(),
+      };
+
+      bus.next({
+        topic: 'prestamoCalculado',
+        payload: loanData,
+      });
     } catch (error) {
       setError(
         'Error al calcular el préstamo. Verifica que el servicio esté ejecutándose en puerto 4001.'
