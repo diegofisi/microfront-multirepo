@@ -12,7 +12,7 @@ Puntos a cubrir en la rúbrica en este multirepo:
 
 * **Diseño conceptual** (#3): PoC Multirepo añadido Loan (para préstamos)
 * **PoC + Servicios** (#4): Loan está consumiendo su propio backend bff-loan
-* **Comunicación** (#7): se está usando Pub/Sub para la comunicación entre Loan y Host
+* **Comunicación** (#7): se está usando Pub/Sub para la comunicación entre Loan y Host (Historial de prestamos al usar el microfront de loan se refleja en el host)
 * **Contenedores** (#9): se está dockerizando Loan y su backend asociado
 * **Otros** (#10) : Se esta usando el patron iFrame para un widget de noticias financieras
   
