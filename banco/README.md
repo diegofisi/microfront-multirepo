@@ -46,6 +46,7 @@ Repositorio para el proyecto de microfrontends con múltiples repositorios.
    - **Login Microfrontend**:           http://localhost:3003
    - **MoneyExchange Microfrontend**:   http://localhost:3001
    - **Payment Microfrontend**:         http://localhost:3002
+   - **Loan Microfrontend**:            http://localhost:3004
    - **Backend API**:                   http://localhost:4000
 
 ## Credenciales de acceso

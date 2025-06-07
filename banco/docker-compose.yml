@@ -67,6 +67,22 @@ services:
     networks:
       - microfrontend-network
 
+  financial-news:
+    build:
+      context: ./financial-widget
+      dockerfile: Dockerfile
+    ports:
+      - '3005:3005'
+    environment:
+      - NODE_ENV=production
+    networks:
+      - microfrontend-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3005"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
   payment:
     build:
       context: ./payment
