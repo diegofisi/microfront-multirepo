@@ -21,7 +21,7 @@ El resto de la rúbrica se estará tratando en otro proyecto que es https://gith
 * **PoC del monorepo** (#2) App de monorepo con Nx
 * **Aplicación Host** (#5) : aplicacion host donde consume los remotos CATALOG PROFILE Y TRANSFERS
 * **Aplicaciones** (#6): las aplicaciones remotas son `CATALOG`, `PROFILE` y `TRANSFERS`
-* **Comunicación** (#7): uso de contextos para compartir información entre microfronts
+* **Comunicación** (#7): uso de contextos - zustand para compartir información entre microfronts
 * **Librerías** (#8): uso de librerías personalizadas en `libs/shared` para componente de bienvenida
 
 
